@@ -12,3 +12,26 @@ TEST_CASE("Verify sum_numbers function")
 	REQUIRE(add_numbers(10, 10) == 20);
 }
 
+TEST_CASE("Test Get Sales Tax")
+{
+    REQUIRE(get_sales_tax_amount(10) == .675);
+    REQUIRE(get_sales_tax_amount(20) == 1.35);
+}
+
+TEST_CASE("Test Get Tip Amount")
+{
+    REQUIRE(get_tip_amount(20, .15) == 3);
+    REQUIRE(get_tip_amount(20, .20) == 4);
+}
+
+TEST_CASE("Test Convert To Decimal")
+{
+    REQUIRE(convert_to_decimal(15) == .15);
+    REQUIRE(convert_to_decimal(.15) == .15);
+    REQUIRE(convert_to_decimal(20) == .20);
+    REQUIRE(convert_to_decimal(20) == .20);
+    REQUIRE(convert_to_decimal(.05) == .05);
+    REQUIRE(convert_to_decimal(5) == .05);
+    REQUIRE(convert_to_decimal(1) == .01);
+    REQUIRE(convert_to_decimal(.01) == .01);
+}
