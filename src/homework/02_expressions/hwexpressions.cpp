@@ -1,8 +1,11 @@
 #include "hwexpressions.h"
 #include <iostream>
 #include <iomanip>
+#include <chrono>
+#include <thread>
 
-using std::cout, std::cin, std::setprecision, std::fixed, std::setw, std::left;
+
+using std::cout, std::cin, std::setprecision, std::fixed, std::setw;
 
 //example
 int add_numbers(int num1, int num2)
@@ -36,9 +39,20 @@ double convert_to_decimal(double tip_rate)
 void display_receipt(double meal_amount, double tax_amount, double tip_amount, double total)
 {
     cout << fixed << setprecision(2);
-    cout << "Meal Amount: $" << setw(6) << meal_amount << '\n';
-    cout << "Sales Tax  : $" << setw(6) << tax_amount  << '\n';
-    cout << "Tip Amount : $" << setw(6) << tip_amount  << '\n';
-    cout << "Total      : $" << setw(6) << total       << '\n';
+    cout << "Meal Amount: $" << setw(5) << meal_amount << '\n';
+    cout << "Sales Tax  : $" << setw(5) << tax_amount  << '\n';
+    cout << "Tip Amount : $" << setw(5) << tip_amount  << '\n';
+    cout << "Total      : $" << setw(5) << total       << '\n';
+}
+
+void loading_bar()
+{
+    cout << "\nPrinting Receipt";
+    for (int i = 0; i < 3; i++)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000) );
+        cout << ".";
+    }
+    cout << "\n\n";
 }
 
