@@ -14,9 +14,9 @@ Call multiply_numbers with 10 and 10 parameter values and display function resul
 
 int main()
 {
-    int num, //Variable declaration
-    num1 = 4, //Variable declaration/Instantiation
-    result; //Variable declaration
+    int      num, //Variable declaration
+        num1 = 4, //Variable declaration/Instantiation
+          result; //Variable declaration
 
     //Program description for user
     cout << "This program utilizes the int returning multiply_numbers(int num) function.\n"
