@@ -1,6 +1,6 @@
 #include "decisions.h"
 
-int main() 
+int main()
 {
     int selx;
 
@@ -8,5 +8,5 @@ int main()
     menu_switch_functions(selx);
     outro();
 
-	return 0;
+    return 0;
 }
