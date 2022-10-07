@@ -1,3 +1,8 @@
+#include <func.h>
+#include <iostream>
+
+using   std::cout,
+        std::cin;
 /*
 use a vector of int with values 8, 4, 20, 88, 66, 99
 
@@ -9,6 +14,10 @@ Program continues until user decides to exit.
 */
 int main() 
 {
+    cout << "Welcome to the DNA Program\n";
+    cout << "--------------------------\n";
+    menu();
+    cout << "Thank you for running the DNA Program\n\nGoodbye!\n";
 
 	return 0;
 }
