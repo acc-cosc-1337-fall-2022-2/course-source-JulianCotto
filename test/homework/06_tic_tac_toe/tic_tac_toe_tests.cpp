@@ -1,7 +1,49 @@
-#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
-#include "catch.hpp"
+#include "tic_tac_toe.h"
+#include <iostream>
 
-TEST_CASE("Verify Test Configuration", "verification") {
-	REQUIRE(true == true);
+using
+    std::cout,
+    std::cin;
+
+int main() 
+{
+    TicTacToe game;
+
+    string first_player;
+    int
+        position,
+        selx = 0;
+
+
+    cout << "Tic Tac Toe\n";
+    cout << "Player 1: Choose X or O\n";
+    cin >> first_player;
+    game.start_game(first_player);
+    display_board_instructions();
+
+    while(selx == 0)
+    {
+        do
+        {
+            cout << "Player \'" << game.get_player() << "\' take your turn (Choose position on board)\n";
+            game.display_board();
+            cin >> position;
+            game.mark_board(position);
+        }
+        while(!game.game_over());
+
+        game.display_board();
+        game.game_over();
+        game.display_board();
+
+        cout << "Would you like to play again?\nPress 0: Yes\nPress 1: No\n";
+        cin >> selx;
+        if(selx == 0)
+        {
+           game.start_game(first_player);
+        }
+    }
+
+    return 0;
 }
 
