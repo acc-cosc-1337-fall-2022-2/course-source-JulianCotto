@@ -5,7 +5,8 @@
 
 using
     std::count,
-    std::cout;
+    std::cout,
+    std::cin;
 
 bool TicTacToe::game_over()
 {
@@ -50,24 +51,6 @@ void TicTacToe::mark_board(int position)
 string TicTacToe::get_player() const
 {
     return player;
-}
-
-void TicTacToe::display_board() const
-{
-
-    for(int i = 0; i < pegs.size(); i++)
-    {
-        cout << pegs[i];
-        if(i == 2 || i == 5 || i == 8)
-        {
-            cout << '\n';
-        }
-        else
-        {
-            cout << "|";
-        }
-    }
-    cout << '\n';
 }
 
 void TicTacToe::set_next_player()
@@ -194,7 +177,7 @@ bool TicTacToe::check_diagonal_win()
 
 void TicTacToe::set_winner()
 {
-    if(TicTacToe::get_player() == "X")
+    if (player == "X")
     {
         winner = "O";
     }
@@ -204,13 +187,33 @@ void TicTacToe::set_winner()
     }
 }
 
-
-//////////////////EXTRA FUNCTIONS//////////////////////////
-
-void display_board_instructions()
+ostream &operator << (ostream &out, const TicTacToe &game)
 {
-    cout << "\nValid Board Positions->|\n";
-    cout << "1|2|3 <---------------<|\n";
-    cout << "4|5|6\n7|8|9\n";
+
+    for(int i = 0; i < game.pegs.size(); i++)
+    {
+        out << game.pegs[i];
+        if (i == 2 || i == 5 || i == 8)
+        {
+            out << '\n';
+        }
+        else
+        {
+            out << '|';
+        }
+    }
+
+    return out;
+}
+
+istream &operator>>(istream &in, TicTacToe &game)
+{
+    int position;
+
+    cout << "Player \'" << game.get_player() << "\' take your turn (Choose position on board)\n";
+    cin >> position;
+    game.mark_board(position);
+
+    return in;
 }
 
