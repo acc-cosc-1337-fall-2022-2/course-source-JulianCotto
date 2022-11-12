@@ -1,4 +1,5 @@
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_manager.h"
 #include <iostream>
 
 using
@@ -10,6 +11,7 @@ using
 int main() 
 {
     TicTacToe game;
+    TicTacToeManager manager;
 
     string first_player;
     int
@@ -21,28 +23,38 @@ int main()
     cout << "Player 1: Choose X or O\n";
     cin >> first_player;
     game.start_game(first_player);
-    display_board_instructions();
+
 
     while(selx == 0)
     {
         do
         {
-            cout << "Player \'" << game.get_player() << "\' take your turn (Choose position on board)\n";
-            game.display_board();
-            cin >> position;
-            game.mark_board(position);
+            cout << game;
+            cin >> game;
         }
         while(!game.game_over());
-
         game.game_over();
-        game.display_board();
-        if (game.get_winner() == "C")
-        {
-            cout << "\nThe game has ended in a tie! Settle the score and play again!\n";
-        }
-        else
+        cout << game;
+        manager.save_game(game);
+
+        int x, o, t;
+        manager.get_winner_totals(x, o, t);
+        cout << "\nX Wins: " << x << '\n';
+        cout << "\nO Wins: " << o << '\n';
+        cout << "\nTies: " << t << '\n';
+
+
+        if (game.get_winner() == "X")
         {
             cout << "\nPlayer " << game.get_winner() << " wins the game!\n";
+        }
+        else if (game.get_winner() == "O")
+        {
+            cout << "\nPlayer " << game.get_winner() << " wins the game!\n";
+        }
+        else if(game.get_winner() == "C")
+        {
+            cout << "\nThe Game ended in a tie!";
         }
 
         cout << "\nWould you like to play again?\nPress 0: Yes\nPress 1: No\n";
@@ -51,7 +63,9 @@ int main()
         {
            game.start_game(first_player);
         }
+
     }
+    cout << manager;
 
     return 0;
 }
