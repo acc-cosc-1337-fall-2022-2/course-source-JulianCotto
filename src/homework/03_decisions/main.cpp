@@ -1,6 +1,12 @@
-//write include statements
+#include "decisions.h"
 
-int main() 
+int main()
 {
-	return 0;
+    int selx;
+
+    selx = menu();
+    menu_switch_functions(selx);
+    outro();
+
+    return 0;
 }
