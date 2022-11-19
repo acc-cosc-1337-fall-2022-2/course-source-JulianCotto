@@ -1,71 +1,75 @@
+#include <iostream>
 #include "tic_tac_toe.h"
 #include "tic_tac_toe_manager.h"
-#include <iostream>
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
 
-using
-    std::cout,
-    std::count,
-    std::stoi,
-    std::cin;
+using std::cout;
+using std::cin;
+using std::make_unique;
 
-int main() 
+int main()
 {
-    TicTacToe game;
+    unique_ptr<TicTacToe> game;
     TicTacToeManager manager;
 
     string first_player;
-    int
-        position = 0,
-        selx = 0;
-    vector<int> pos{1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int select = 0;
 
-    cout << "Tic Tac Toe\n";
-    cout << "Player 1: Choose X or O\n";
-    cin >> first_player;
-    game.start_game(first_player);
-
-
-    while(selx == 0)
+    while (select == 0)
     {
+        string game_selection;
         do
         {
-            cout << game;
-            cin >> game;
+            cout << "Enter 3 for 3x3 Tic Tac Toe\nEnter 4 for 4x4 Tic Tac Toe\n";
+            cin >> game_selection;
         }
-        while(!game.game_over());
-        game.game_over();
-        cout << game;
-        manager.save_game(game);
+        while(game_selection != "3" && game_selection != "4");
 
-        int x, o, t;
-        manager.get_winner_totals(x, o, t);
-        cout << "\nX Wins: " << x << '\n';
-        cout << "\nO Wins: " << o << '\n';
-        cout << "\nTies: " << t << '\n';
-
-
-        if (game.get_winner() == "X")
+        if (game_selection == "3")
         {
-            cout << "\nPlayer " << game.get_winner() << " wins the game!\n";
+            game = make_unique<TicTacToe3>();
         }
-        else if (game.get_winner() == "O")
+        else
         {
-            cout << "\nPlayer " << game.get_winner() << " wins the game!\n";
-        }
-        else if(game.get_winner() == "C")
-        {
-            cout << "\nThe Game ended in a tie!";
+            game = make_unique<TicTacToe4>();
         }
 
-        cout << "\nWould you like to play again?\nPress 0: Yes\nPress 1: No\n";
-        cin >> selx;
-        if(selx == 0)
-        {
-           game.start_game(first_player);
-        }
+        cout << "Player One: Choose X or O\n";
+        cin >> first_player;
 
+        if (first_player == "X" || first_player == "O")
+        {
+            game->start_game(first_player);
+
+            do
+            {
+                cout << *game;
+                cin >> *game;
+            }
+            while (!game->game_over());
+
+            manager.save_game(game);
+
+            int x, o, t;
+            manager.get_winner_totals(x,o,t);
+            cout << "\nX Wins: " << x << "\n";
+            cout << "O Wins: " << o << "\n";
+            cout << "Ties: " << t << "\n";
+
+            cout << "Would you like to play again? Press 0 for continue or 1 to Exit\n";
+            cin >> select;
+        }
+        else
+        {
+            cout << "Invalid entry. Please try again\n";
+        }
     }
-    cout << manager;
-
+    while (select != 0)
+    {
+        cout<<"Thank you for playing!"<<"\n\n";
+        break;
+    }
+    cout<<manager;
     return 0;
 }
